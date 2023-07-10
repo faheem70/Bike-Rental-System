@@ -2,11 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server\\app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js",
-    "dev": "concurrently \"npm start \" "
+    "dev": "nodemon server/app.js",
+    "server": "concurrently \"npm start \" "
   },
   "keywords": [],
   "author": "",
