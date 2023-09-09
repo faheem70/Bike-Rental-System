@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
-
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/header.css";
+
 
 const navLinks = [
   {
@@ -25,11 +26,44 @@ const navLinks = [
   },
 ];
 
+
 const Header = () => {
   const menuRef = useRef(null);
-
+  const location = useLocation();
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [firstName, setFirstName] = useState('');
 
+  // Function to handle logout
+  const handleLogout = () => {
+    // Handle logout logic here
+    // You can remove the token from localStorage or your authentication state
+    // Example using localStorage:
+    localStorage.removeItem("userdbtoken");
+
+    // Update the authentication status
+    setIsLoggedIn(false);
+  };
+
+  // Check user authentication when the component mounts
+  useEffect(() => {
+    // Check if the user is authenticated (e.g., by checking for a token in localStorage)
+    const token = localStorage.getItem("userdbtoken");
+
+
+    if (token) {
+      // User is authenticated
+      setIsLoggedIn(true);
+    } else {
+      // User is not authenticated
+      setIsLoggedIn(false);
+    }
+    const params = new URLSearchParams(location.search);
+    const firstNameFromQuery = params.get('fname');
+    if (firstNameFromQuery) {
+      setFirstName(firstNameFromQuery);
+    }
+  }, [location.search]);
   return (
     <header className="header">
       {/* ============ header top ============ */}
@@ -47,15 +81,26 @@ const Header = () => {
 
             <Col lg="6" md="6" sm="6">
               <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                <Link to="/login" className=" d-flex align-items-center gap-1">
-                  <i class="ri-login-circle-line"></i> Login
-                </Link>
-
-                <Link to="/register" className=" d-flex align-items-center gap-1">
-                  <i class="ri-user-line"></i> Register
-                </Link>
+                {isLoggedIn ? (
+                  // Display user name and logout button if logged in
+                  <>
+                    <span>Welcome, {firstName}</span>
+                    <button onClick={handleLogout}>Logout</button>
+                  </>
+                ) : (
+                  // Display login and register links if not logged in
+                  <>
+                    <Link to="/login" className="d-flex align-items-center gap-1">
+                      <i className="ri-login-circle-line"></i> Login
+                    </Link>
+                      <Link to="/register" className="d-flex align-items-center gap-1">
+                        <i className="ri-user-line"></i> Register
+                      </Link>
+                  </>
+                )}
               </div>
             </Col>
+
           </Row>
         </Container>
       </div>

@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { registerfunction } from "../services/Apis";
 import { useNavigate } from "react-router-dom"
 import "../styles/mix.css"
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
 
@@ -30,26 +31,33 @@ const Register = () => {
         const { fname, email, password } = inputdata;
 
         if (fname === "") {
-            toast.error("Enter Your Name")
+            toast.error("Enter Your Name");
         } else if (email === "") {
-            toast.error("Enter Your Email")
+            toast.error("Enter Your Email");
         } else if (!email.includes("@")) {
-            toast.error("Enter Valid Email")
+            toast.error("Enter Valid Email");
         } else if (password === "") {
-            toast.error("Enter Your Password")
+            toast.error("Enter Your Password");
         } else if (password.length < 6) {
-            toast.error("password length minimum 6 character")
+            toast.error("Password length must be at least 6 characters");
         } else {
-            const response = await registerfunction(inputdata);
+            try {
+                const response = await registerfunction(inputdata);
 
-            if (response.status === 200) {
-                setInputdata({ ...inputdata, fname: "", email: "", password: "" });
-                navigate("/login")
-            } else {
-                toast.error(response.response.data.error);
+                if (response.status === 200) {
+                    setInputdata({ ...inputdata, fname: "", email: "", password: "" });
+                    //navigate("/login");
+                    navigate(`/login?fname=${fname}`);
+                } else {
+                    const errorMessage = response?.response?.data?.error;
+                    toast.error(errorMessage);
+                }
+            } catch (error) {
+                console.error(error);
+                toast.error("An error occurred during registration");
             }
         }
-    }
+    };
 
 
     return (
@@ -58,8 +66,7 @@ const Register = () => {
                 <div className="form_data">
                     <div className="form_heading">
                         <h1>Sign Up</h1>
-                        <p style={{ textAlign: "center" }}>We are glad that you will be using Project Cloud to manage
-                            your tasks! We hope that you will get like it.</p>
+                        <p style={{ textAlign: "center" }}>Register here, and ride on your own terms.</p>
                     </div>
                     <form>
                         <div className="form_input">
@@ -83,7 +90,9 @@ const Register = () => {
                         <p>Don't have and account </p>
                     </form>
                 </div>
-                <ToastContainer />
+                <ToastContainer className="custom-toast" autoClose={2000}
+                    position="top-center"// Adjust the time (in milliseconds) the toast stays visible (e.g., 3000ms = 3 seconds)
+                    hideProgressBar />
             </section>
         </>
     )

@@ -10,6 +10,9 @@ import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Otp from "../pages/Otp";
+import CarProduct from "../components/UI/CarProduct";
+import Checkout from "../pages/Checkout";
+
 
 const Routers = () => {
   return (
@@ -23,7 +26,9 @@ const Routers = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path='/user/otp' element={<Otp />} />
+      <Route path="/cartproduct" element={<CarProduct />} />
     </Routes>
   );
 };

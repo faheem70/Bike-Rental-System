@@ -10,14 +10,14 @@ import PaymentMethod from "../components/UI/PaymentMethod";
 const CarDetails = () => {
   const { slug } = useParams();
 
-  const singleCarItem = carData.find((item) => item.carName === slug);
+  const singleCarItem = carData.find((item) => item.bikeName === slug);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [singleCarItem]);
 
   return (
-    <Helmet title={singleCarItem.carName}>
+    <Helmet title={singleCarItem.bikeName}>
       <section>
         <Container>
           <Row>
@@ -27,7 +27,7 @@ const CarDetails = () => {
 
             <Col lg="6">
               <div className="car__info">
-                <h2 className="section__title">{singleCarItem.carName}</h2>
+                <h2 className="section__title">{singleCarItem.bikeName}</h2>
 
                 <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">

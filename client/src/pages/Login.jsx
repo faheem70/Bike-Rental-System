@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { sentOtpFunction } from "../services/Apis";
 import Spinner from 'react-bootstrap/Spinner';
 import "../styles/mix.css"
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
@@ -34,7 +35,7 @@ const Login = () => {
                 setSpiner(false)
                 navigate("/user/otp", { state: email })
             } else {
-                alert(response.response.data.error);
+                toast.error(response.response.data.error);
             }
         }
     }
@@ -60,7 +61,7 @@ const Login = () => {
                         <p>Don't have and account <NavLink to="/register">Sing up</NavLink> </p>
                     </form>
                 </div>
-                <ToastContainer />
+                <ToastContainer className="custom-toast" />
             </section>
         </>
     )

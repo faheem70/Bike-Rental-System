@@ -13,3 +13,7 @@ export const sentOtpFunction = async (data) => {
 export const userVerify = async (data) => {
     return await commonrequest("POST", `${BACKEND_URL}/user/login`, data)
 }
+
+export const userDetails = async (data) => {
+    return await commonrequest("GET", `${BACKEND_URL}/user/name`, data)
+}

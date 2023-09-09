@@ -8,10 +8,11 @@ import FindCarForm from "../components/UI/FindCarForm";
 import AboutSection from "../components/UI/AboutSection";
 import ServicesList from "../components/UI/ServicesList";
 import carData from "../assets/data/carData";
-import CarItem from "../components/UI/CarItem";
+//import CarItem from "../components/UI/CarItem";
 //import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import Testimonial from "../components/UI/Testimonial";
 import { useNavigate } from "react-router-dom";
+import CarProduct from "../components/UI/CarProduct";
 
 
 
@@ -80,8 +81,8 @@ const Home = () => {
               <h2 className="section__title">Hot Offers</h2>
             </Col>
 
-            {carData.slice(0, 6).map((item) => (
-              <CarItem item={item} key={item.id} />
+            {carData.slice(0, 1).map((item) => (
+              <CarProduct item={item} key={item.id} />
             ))}
           </Row>
         </Container>

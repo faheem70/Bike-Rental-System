@@ -140,13 +140,16 @@ module.exports = router;*/
 const express = require("express");
 const router = new express.Router();
 const controllers = require("../controllers/userControllers");
-
+const carcontrollers = require("../controllers/carControllers");
 
 // Routes
-router.post("/user/register", controllers.userregister);
+router.post("/user/register", controllers.userRegister);
 router.post("/user/sendotp", controllers.userOtpSend);
 router.post("/user/login", controllers.userLogin);
-
+router.get("/user/name", controllers.userDetails)
+//router.post("api/cars/add", carcontrollers.creatProduct);
+//router.get("api/cars/all", carcontrollers.getProduct);
+//router.get('ap1/cars/find', carcontrollers.searchProduct);
 
 
 module.exports = router;

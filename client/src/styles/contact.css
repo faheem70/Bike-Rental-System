@@ -14,7 +14,23 @@
   outline: none;
   border-radius: 5px;
 }
+.react-toastify__toast-container {
+  top: 10px;
+  /* Adjust the top position */
+  right: 10px;
+  /* Adjust the right position */
+}
 
+/* Customize the toast message style */
+.toast-message {
+  background: darkblue;
+  color: #fff;
+  font-size: 20px;
+  width: 34vw;
+  padding: 30px 20px;
+  text-align: right;
+  /* Align text to the right */
+}
 @media only screen and (max-width: 768px) {
   .contact__btn {
     margin-bottom: 40px;
